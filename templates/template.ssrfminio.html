@@ -1,0 +1,35 @@
+{{define "template.ssrfminio"}} {{template "template.header" .}} {{template "template.sidebar" .}}
+<div class="col-md-9">
+    <div class="panel panel-primary">
+        <div class="panel-heading">Client Side Authentication</div>
+        <div class="panel-body">
+            <div class="pnl">
+                <!-- <span class="subheader">SQL Injection Vulnerability</span> -->
+                <p>Hello minio</p>
+                <div class="well">
+                    <form class="form-inline" id="ssrfForm">
+                        <div class="form-group">
+                            <label for="urlLink" style="color:#428bca;font-family:Open Sans; font-weight:500">Input Your Url:</label>
+                            <input type="text" class="form-control" name="url" id="urlLink">
+                            <button type="button" id="vrf" class="btn btn-small btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+                <p>Verify your account to view full profile:</p>
+                <div id="alert" style="display: none"></div> 
+            </div>
+        </div>
+    </div>
+</div>
+{{.js}}
+<script>
+    $("#vrf").on('click', function(){
+        var data = $("#ssrfForm").serialize()
+        url = "{{.url}}minioLoginSTS"
+        $.post(url,data)
+        .done(function(res){
+            console.log(res[0])
+        })
+    });
+</script>
+{{template "template.footer"}} {{ end }}

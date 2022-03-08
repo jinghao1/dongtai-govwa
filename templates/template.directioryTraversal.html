@@ -1,0 +1,45 @@
+{{define "template.directioryTraversal"}} {{template "template.header" .}} {{template "template.sidebar" .}}
+<div class="col-md-9">
+    <div class="panel panel-primary">
+        <div class="panel-heading">Client Side Authentication</div>
+        <div class="panel-body">
+            <div class="pnl">
+                <!-- <span class="subheader">SQL Injection Vulnerability</span> -->
+                <p>Hello directoryTraversal</p>
+                <div class="well">
+                    <form class="form-inline" id="directoryTraversalForm">
+                        <div class="form-group">
+                            <label for="path" style="color:#428bca;font-family:Open Sans; font-weight:500">Input Your path:</label>
+                            <input type="text" class="form-control" name="path" id="path">
+                            <button type="button" id="vrf" class="btn btn-small btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+                <p>Verify your account to view full profile:</p>
+                <div id="alert" style="display: none"></div> 
+            </div>
+        </div>
+    </div>
+</div>
+{{.js}}
+<script>
+    $("#vrf").on('click', function(){
+        var formData = {};
+        var data = $("#directoryTraversalForm").serializeArray()
+        $.each(data, function() {
+            formData[this.name] = this.value;
+        });
+        url = "{{.url}}directoryTraversal"
+        $.ajax({
+            url,
+            headers:{'Content-Type':'application/json;charset=utf8'},
+            dateType:'json',
+            type:'post',
+            data:JSON.stringify(formData),
+            done:(res)=>{
+                console.log(res[0])
+            }
+        })
+    });
+</script>
+{{template "template.footer"}} {{ end }}

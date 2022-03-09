@@ -8,5 +8,3 @@ require (
 	github.com/gorilla/sessions v1.2.1
 	github.com/julienschmidt/httprouter v1.3.0
 )
-
-replace github.com/HXSecurity/DongTai-agent-go => ../DongTai-agent-go
